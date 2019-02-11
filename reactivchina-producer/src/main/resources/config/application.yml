@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+
+  data:
+
+    cassandra:
+
+      keyspace-name: reactivekeyspace
+      schema-action: recreate
+      contact-points: ["172.17.0.2"]
+      port: 9042
