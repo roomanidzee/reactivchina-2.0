@@ -1,0 +1,41 @@
+{
+  "groups": [
+    {
+      "name": "spring.kafka.consumer",
+      "type": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.kafka.consumer.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.topic-name",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.offset-type",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.consumer.group-id",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.key-serializer",
+      "type": "java.lang.Class",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.value-serializer",
+      "type": "java.lang.Class",
+      "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
+    }
+  ]
+}

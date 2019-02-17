@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "name": "spring.kafka.producer",
+      "type": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties",
+      "sourceType": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.kafka.producer.bootstrap-servers",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.topic-name",
+      "type": "java.lang.String",
+      "sourceType": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.key-serializer",
+      "type": "java.lang.Class",
+      "sourceType": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties"
+    },
+    {
+      "name": "spring.kafka.producer.value-serializer",
+      "type": "java.lang.Class",
+      "sourceType": "com.romanidze.reactivchinaproducer.config.KafkaProducerProperties"
+    }
+  ]
+}

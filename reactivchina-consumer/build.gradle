@@ -6,8 +6,8 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven { 
-            url 'http://repo.spring.io/plugins-release' 
+        maven {
+            url 'http://repo.spring.io/plugins-release'
         }
     }
     dependencies {
@@ -34,6 +34,7 @@ compileJava.options.encoding = 'UTF-8'
 
 ext{
     lombokVersion = '1.18.4'
+    reactorKafkaVersion = '1.1.0.RELEASE'
 }
 
 repositories {
@@ -46,8 +47,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-webflux')
 
-    compile('org.springframework.boot:spring-boot-starter-data-cassandra-reactive')
     compile('org.springframework.kafka:spring-kafka')
+    compile("io.projectreactor.kafka:reactor-kafka:$reactorKafkaVersion")
 
     compile("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
