@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+
+  data:
+
+    cassandra:
+
+      keyspace-name: reactivekeyspace
+      schema-action: recreate
+      contact-points: ["cassandra-service"]
+      port: 9042
+
+  kafka:
+
+    producer:
+
+      bootstrap-servers: ["kafka-service:9092"]
+      topic-name: kafka-test
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

@@ -1,0 +1,107 @@
+version: '2.4'
+
+services:
+
+    cassandra-service:
+
+        image: 'cassandra:3.11.4'
+
+        ports:
+
+         - "7199:7199" 
+         - "7000:7000" 
+         - "7001:7001" 
+         - "9042:9042" 
+         - "9160:9160"
+
+        env_file:
+         - environments/jvm.env
+         - environments/cassandra.env
+
+        volumes:
+         - './cassandra-data/cassandra:/var/lib/cassandra'
+         - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
+
+        container_name: cassandra-service
+        mem_limit: 256m
+
+    zookeeper-service:
+    
+        image: 'wurstmeister/zookeeper:3.4.6'  
+
+        ports:
+
+         - "2181:2181"
+
+        container_name: zookeeper-service
+        mem_limit: 256m
+
+    kafka-service:
+    
+        image: 'wurstmeister/kafka:2.12-2.1.1'
+
+        depends_on:
+
+         - zookeeper-service
+
+        ports:
+
+         - "9092:9092"
+
+        env_file:
+         - environments/jvm.env
+         - environments/kafka.env 
+
+        container_name: kafka-service
+        mem_limit: 256m
+
+    producer-service:
+
+        image: 'romanidze/producer-service'
+
+        depends_on:
+         - cassandra-service
+         - zookeeper-service
+         - kafka-service 
+    
+        build:
+
+            context: ../reactivchina-producer
+            dockerfile: Dockerfile 
+
+        ports:
+         - "8080:8080"
+
+        env_file:
+         - environments/jvm.env 
+
+        container_name: producer-service
+        mem_limit: 512m
+
+    consumer-service:
+
+        image: 'romanidze/consumer-service'
+    
+        depends_on:
+         - cassandra-service
+         - zookeeper-service
+         - kafka-service
+         - producer-service
+
+        build:
+        
+            context: ../reactivchina-consumer
+            dockerfile: Dockerfile
+
+        ports:
+         - "8081:8081"
+
+        env_file:
+         - environments/jvm.env 
+
+        container_name: consumer-service
+        mem_limit: 512m
+        
+networks:
+  default:
+    driver: bridge
