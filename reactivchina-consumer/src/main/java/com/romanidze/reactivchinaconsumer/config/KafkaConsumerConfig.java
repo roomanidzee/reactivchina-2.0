@@ -37,8 +37,8 @@ public class KafkaConsumerConfig {
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, this.kafkaConsumerProperties.getBootstrapServers());
         configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, this.kafkaConsumerProperties.getOffsetType());
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, this.kafkaConsumerProperties.getGroupID());
-        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, this.kafkaConsumerProperties.getKeySerializer());
-        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, this.kafkaConsumerProperties.getValueSerializer());
+        configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, this.kafkaConsumerProperties.getKeyDeserializer());
+        configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, this.kafkaConsumerProperties.getValueDeserializer());
 
         return new DefaultKafkaReceiver<>(ConsumerFactory.INSTANCE,
                                         ReceiverOptions.create(configProps)

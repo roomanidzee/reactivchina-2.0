@@ -34,6 +34,6 @@ public class KafkaConsumerProperties {
     private String topicName;
     private String groupID;
     private String offsetType;
-    private Class keySerializer;
-    private Class valueSerializer;
+    private Class keyDeserializer;
+    private Class valueDeserializer;
 }

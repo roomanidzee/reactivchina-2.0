@@ -1,5 +1,7 @@
 package com.romanidze.reactivchinaproducer.services.implementations;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.romanidze.reactivchinaproducer.config.KafkaProducerProperties;
 import com.romanidze.reactivchinaproducer.domain.User;
 import com.romanidze.reactivchinaproducer.dto.UserDTO;
@@ -23,21 +25,31 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final KafkaProducerProperties kafkaProducerProperties;
-    private final KafkaTemplate<String, UserDTO> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,
-                           KafkaProducerProperties kafkaProducerProperties, KafkaTemplate<String, UserDTO> kafkaTemplate) {
+    public UserServiceImpl(UserRepository userRepository, KafkaProducerProperties kafkaProducerProperties,
+                           KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
         this.userRepository = userRepository;
         this.kafkaProducerProperties = kafkaProducerProperties;
         this.kafkaTemplate = kafkaTemplate;
+        this.objectMapper = objectMapper;
     }
 
     @Override
     public Mono<User> createUser(UserDTO userDTO) {
 
         User user = UserDTO.dtoToDomain(userDTO);
-        this.kafkaTemplate.send(this.kafkaProducerProperties.getTopicName(), userDTO);
+        String jsonString;
+
+        try {
+            jsonString = this.objectMapper.writeValueAsString(userDTO);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException("При обработке модели произошла ошибка: " + e.getMessage());
+        }
+
+        this.kafkaTemplate.send(this.kafkaProducerProperties.getTopicName(), jsonString);
 
         return this.userRepository.save(user);
 

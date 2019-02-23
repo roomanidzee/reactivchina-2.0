@@ -35,6 +35,7 @@ compileJava.options.encoding = 'UTF-8'
 ext{
     lombokVersion = '1.18.4'
     reactorKafkaVersion = '1.1.0.RELEASE'
+    jacksonVersion = '2.9.8'
 }
 
 repositories {
@@ -53,5 +54,9 @@ dependencies {
     compile("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     compile("org.springframework.boot:spring-boot-configuration-processor")
+
+    compile("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     
 }

@@ -28,12 +28,12 @@
       "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
     },
     {
-      "name": "spring.kafka.producer.key-serializer",
+      "name": "spring.kafka.producer.key-deserializer",
       "type": "java.lang.Class",
       "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
     },
     {
-      "name": "spring.kafka.producer.value-serializer",
+      "name": "spring.kafka.producer.value-deserializer",
       "type": "java.lang.Class",
       "sourceType": "com.romanidze.reactivchinaconsumer.config.KafkaConsumerProperties"
     }
