@@ -4,7 +4,7 @@ services:
 
     cassandra-service:
 
-        image: 'cassandra:3.11.4'
+        image: 'cassandra:3.11.3'
 
         ports:
 
@@ -20,7 +20,6 @@ services:
 
         volumes:
          - './cassandra-data/cassandra:/var/lib/cassandra'
-         - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
 
         container_name: cassandra-service
         mem_limit: 256m
@@ -54,54 +53,3 @@ services:
 
         container_name: kafka-service
         mem_limit: 256m
-
-    producer-service:
-
-        image: 'romanidze/producer-service'
-
-        depends_on:
-         - cassandra-service
-         - zookeeper-service
-         - kafka-service 
-    
-        build:
-
-            context: ../reactivchina-producer
-            dockerfile: Dockerfile 
-
-        ports:
-         - "8080:8080"
-
-        env_file:
-         - environments/jvm.env 
-
-        container_name: producer-service
-        mem_limit: 512m
-
-    consumer-service:
-
-        image: 'romanidze/consumer-service'
-    
-        depends_on:
-         - cassandra-service
-         - zookeeper-service
-         - kafka-service
-         - producer-service
-
-        build:
-        
-            context: ../reactivchina-consumer
-            dockerfile: Dockerfile
-
-        ports:
-         - "8081:8081"
-
-        env_file:
-         - environments/jvm.env 
-
-        container_name: consumer-service
-        mem_limit: 512m
-        
-networks:
-  default:
-    driver: bridge
