@@ -9,14 +9,14 @@ spring:
 
       keyspace-name: reactivekeyspace
       schema-action: recreate
-      contact-points: ["172.19.0.2"]
+      contact-points: ["172.22.0.2"]
       port: 9042
 
   kafka:
 
     producer:
 
-      bootstrap-servers: ["172.19.0.4:9092"]
+      bootstrap-servers: ["172.22.0.4:9092"]
       topic-name: kafka-test
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

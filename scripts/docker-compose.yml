@@ -16,10 +16,10 @@ services:
 
         env_file:
          - environments/jvm.env
-         - environments/cassandra.env
+         - environments/cassandra/cassandra.env
 
         volumes:
-         - './cassandra-data/cassandra:/var/lib/cassandra'
+         - './environments/cassandra/cassandra-data:/var/lib/cassandra'
 
         container_name: cassandra-service
         mem_limit: 256m
